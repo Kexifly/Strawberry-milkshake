@@ -1,32 +1,10 @@
 #include <iostream>
 #include "raylib.h"
+#include "Ball.h"
+#include "Paddle.h"
+#include "Collision.h"
+#include "Sound.h"
 
-struct Ball
-{
-	float x, y;
-	float speedX, speedY;
-	float radius;
-
-	void Draw()
-	{
-		DrawCircle((int) x, (int) y, radius, GREEN);
-	}
-	
-};
-struct Paddle
-{
-	float x, y;
-	float speed;
-	float width, height;
-	Rectangle GetRec()
-	{
-		return Rectangle{ x - width / 2, y - height / 2 , width, height };
-	}
-	void Draw()
-	{
-		DrawRectangleRec(GetRec(), DARKBLUE);
-	}
-};
 
 #define SCREEN_WIDTH 800
 #define SCREEN_HEIGHT 600
