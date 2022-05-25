@@ -13,7 +13,9 @@ int main()
 {
 
 	//SetConfigFlags(FLAG_WINDOW_RESIZABLE);
+	
 	InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Pong Pong");
+	ToggleFullscreen();
 	SetTargetFPS(120);
 	Ball ball;
 	ball.x = - GetScreenWidth() / 2.0f;
@@ -40,7 +42,7 @@ int main()
 	Texture2D background = LoadTexture("..\\..\\Images\\vortex.png");
 		while (!WindowShouldClose())
 		{
-
+			
 			ball.x += ball.speedX * GetFrameTime();
 			ball.y += ball.speedY * GetFrameTime();
 
