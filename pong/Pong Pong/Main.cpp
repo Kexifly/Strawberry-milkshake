@@ -9,20 +9,17 @@
 #define SCREEN_WIDTH 800
 #define SCREEN_HEIGHT 600
 
+
 int main()
 {
 
 	//SetConfigFlags(FLAG_WINDOW_RESIZABLE);
-	
+	PlaySoundTrack();
 	InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Pong Pong");
 	ToggleFullscreen();
 	SetTargetFPS(120);
 	Ball ball;
-	ball.x = - GetScreenWidth() / 2.0f;
-	ball.y = GetScreenHeight() / 2.0f;
-	ball.radius = 5;
-	ball.speedX = 100;
-	ball.speedY = 300;
+	
 
 	Paddle leftPaddle;
 	leftPaddle.x = 50;
@@ -40,22 +37,11 @@ int main()
 
 	const char* winnerText = nullptr;
 	Texture2D background = LoadTexture("..\\..\\Images\\vortex.png");
+	
 		while (!WindowShouldClose())
 		{
 			
-			ball.x += ball.speedX * GetFrameTime();
-			ball.y += ball.speedY * GetFrameTime();
-
-			if (ball.y < 0)
-			{
-				ball.y = 0;
-				ball.speedY *= -1;
-			}
-			if (ball.y > GetScreenHeight())
-			{ 
-				ball.y = GetScreenHeight();
-				ball.speedY *= -1;
-			}
+			
 			if (IsKeyDown(KEY_W))
 			{
 				leftPaddle.y -= leftPaddle.speed * GetFrameTime();
@@ -73,11 +59,11 @@ int main()
 				rightPaddle.y += rightPaddle.speed * GetFrameTime();
 			}
 
-			if (CheckCollisionCircleRec(Vector2{ ball.x, ball.y }, ball.radius,leftPaddle.GetRec()))
+			if (CheckCollisionCircleRec(Vector2{ ball.x, ball.y }, ball.radius, leftPaddle.GetRec()))
 			{
-				if (ball.speedX < 0)	
+				if (speedX < 0)	
 				{
-					ball.speedX *= -1.1f;
+					speedX *= -1.1f;
 					//ball.speedY = (ball.y - leftPaddle.y) * ball.speedX / (leftPaddle.height / 2);
 				}
 			}
@@ -116,7 +102,7 @@ int main()
 				rightPaddle.y = SCREEN_HEIGHT - rightPaddle.height / 2;
 			}
 
-			if (ball.x < 0)
+			if (ball < 0)
 			{
 				winnerText = " Right Player! You Win!";
 			}
@@ -128,10 +114,7 @@ int main()
 
 			if (winnerText && IsKeyPressed(KEY_SPACE))
 			{
-				ball.x = GetScreenWidth() / 2;
-				ball.y = GetScreenHeight() / 2;
-				ball.speedX = 100;
-				ball.speedY = 300;
+				ball.Reset();
 				winnerText = nullptr;
 			}
 

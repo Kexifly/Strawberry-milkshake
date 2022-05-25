@@ -1,15 +1,20 @@
 #pragma once
 #include "raylib.h"
 
- struct Ball
+
+ class Ball
 {
+    Texture2D ball = LoadTexture("..\\..\\Images\\yellowball.png");
 	float x, y;
 	float speedX, speedY;
 	float radius;
+  public:
+	  void Draw();
 
-	void Draw()
-	{
-		DrawCircle((int)x, (int)y, radius, GREEN);
-	}
+	Ball();
 
+	void Update();
+
+	void Reset();
 };
+ 
