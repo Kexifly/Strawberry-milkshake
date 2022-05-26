@@ -2,8 +2,8 @@
 #include "raylib.h"
 #include "Ball.h"
 #include "Paddle.h"
-#include "Collision.h"
 #include "Sound.h"
+
 
 
 #define SCREEN_WIDTH 800
@@ -35,9 +35,15 @@ int main()
 	rightPaddle.height = 100;
 	rightPaddle.speed = 500;
 
+	const char* winnerPointOne = nullptr;
+	const char* winnerPointTwo = nullptr;
 	const char* winnerText = nullptr;
+
 	Texture2D background = LoadTexture("..\\..\\Images\\vortex.png");
 	
+	int Player1Points = 0;
+	int Player2Points = 0;
+
 		while (!WindowShouldClose())
 		{
 			
@@ -59,21 +65,23 @@ int main()
 				rightPaddle.y += rightPaddle.speed * GetFrameTime();
 			}
 
-			if (CheckCollisionCircleRec(Vector2{ ball.x, ball.y }, ball.radius, leftPaddle.GetRec()))
+			ball.Update();
+
+			if (CheckCollisionCircleRec(ball.GetPosition(), ball.GetRadius(), leftPaddle.GetRec()))
 			{
-				if (speedX < 0)	
+				if (ball.GetVelocity().x < 0)
 				{
-					speedX *= -1.1f;
-					//ball.speedY = (ball.y - leftPaddle.y) * ball.speedX / (leftPaddle.height / 2);
+					ball.ReflectVelocity(1.1f);
+					
 				}
 			}
-			// 
-			if (CheckCollisionCircleRec(Vector2{ ball.x, ball.y }, ball.radius, rightPaddle.GetRec()))
+			 
+			if (CheckCollisionCircleRec(ball.GetPosition(), ball.GetRadius(), rightPaddle.GetRec()))
 			{
-				if (ball.speedX > 0)
+				if (ball.GetVelocity().x > 0)
 				{
-					ball.speedX *= -1.1f;
-					//ball.speedY = (ball.y - rightPaddle.y * ball.speedX / (rightPaddle.height / 2)) ;
+					ball.ReflectVelocity(1.1f);
+					
 				}
 			} 
 			//Screen Collision With Paddles
@@ -102,21 +110,36 @@ int main()
 				rightPaddle.y = SCREEN_HEIGHT - rightPaddle.height / 2;
 			}
 
-			if (ball < 0)
+			// Points
+			if (ball.GetPosition().x < 0)
 			{
-				winnerText = " Right Player! You Win!";
+				Player2Points += 1;
+				ball.Reset();
 			}
 
-			if (ball.x > GetScreenWidth())
+			if (ball.GetPosition().x > GetScreenWidth())
 			{
-				winnerText = " Left Player! You Win!";
+				Player1Points += 1;
+				ball.Reset();
+			}
+
+			if (Player1Points == 5)
+			{
+				winnerText = ("Left Player Wins!");
+			}
+			if (Player2Points == 5)
+			{
+				winnerText = ("Right Player Wins");
 			}
 
 			if (winnerText && IsKeyPressed(KEY_SPACE))
 			{
+				Player1Points = 0;
+				Player2Points = 0;
 				ball.Reset();
 				winnerText = nullptr;
 			}
+
 
 			BeginDrawing();
 			

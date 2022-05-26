@@ -9,11 +9,27 @@ Ball::Ball()
 {
 	x = -GetScreenWidth() / 2.0f;
 	y = GetScreenHeight() / 2.0f;
-	radius = 5;
+	radius = ball.width * 0.5f;
 	speedX = 100;
 	speedY = 300;
 }
 
+Vector2 Ball::GetPosition() const
+{
+	return Vector2{ x + ball.width * 0.5f, y + ball.height * 0.5f };
+}
+float Ball::GetRadius() const
+{
+	return radius;
+}
+Vector2 Ball::GetVelocity() const
+{
+	return Vector2 {speedX, speedY};
+}
+void Ball::ReflectVelocity(float scale)
+{
+	speedX *= -scale;
+}
 void Ball::Update()
 {
 	x += speedX * GetFrameTime();
