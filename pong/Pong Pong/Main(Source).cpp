@@ -31,6 +31,7 @@ int main()
 			DrawFPS(10, 10);
 			EndDrawing();
 		}
+		std::cout << "Hello, please make sure to exit the game correctly" << std::endl;
 	CloseWindow();
 	return 0;
 }
