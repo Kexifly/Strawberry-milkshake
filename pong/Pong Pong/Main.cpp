@@ -6,8 +6,8 @@
 
 
 // Define the screen Width and Height. 
-#define SCREEN_WIDTH 800
-#define SCREEN_HEIGHT 600
+#define SCREEN_WIDTH 1920
+#define SCREEN_HEIGHT 1080
 
 
 int main()
@@ -31,20 +31,20 @@ int main()
 	leftPaddle.y = GetScreenHeight() / 2;
     leftPaddle.width = 10;
 	leftPaddle.height = 100;
-	leftPaddle.speed = 500;
+	leftPaddle.speed = 1200;
 	// Creating the RIGHT paddle object.
 	Paddle rightPaddle;
 	rightPaddle.x = GetScreenWidth() - 50;
 	rightPaddle.y = GetScreenHeight() / 2;
 	rightPaddle.width = 10;
 	rightPaddle.height = 100;
-	rightPaddle.speed = 500;
+	rightPaddle.speed = 1200;
 	// This is where we create the winner condition variables. 
 	const char* winnerPointOne = nullptr;
 	const char* winnerPointTwo = nullptr;
 	const char* winnerText = nullptr;
 	// Here is where I load in the background texture. 
-	Texture2D background = LoadTexture("..\\..\\Images\\vortex.png");
+	Texture2D background = LoadTexture("..\\..\\Images\\cloudfriend.png");
 	// This is where we create the Player Point variables for both P1 and P2.
 	int Player1Points = 0;
 	int Player2Points = 0;
@@ -161,18 +161,20 @@ int main()
 				ball.Reset();
 				winnerText = nullptr;
 			}
+			
+			
+			
+			//---------------------------------------------------------------------------------------------------------------
+			// Draw
+			BeginDrawing();
+			// Draw our custom asset background to the screen.
+			DrawTexture(background, 0,0, WHITE);
 			// This if statement Draws the winner text to the screen. 
 			if (winnerText)
 			{
 				int textWidth = MeasureText(winnerText, 60);
 				DrawText(winnerText, GetScreenWidth() / 2 - textWidth / 2, GetScreenHeight() / 2 - 30, 60, GREEN);
 			}
-			//---------------------------------------------------------------------------------------------------------------
-			// Draw
-
-			BeginDrawing();
-			// Draw our custom asset background to the screen.
-			DrawTexture(background, 0,0, WHITE);
 			// Draw our ball to the screen.
 			ball.Draw();
 			// Draw our left paddle to the screen.

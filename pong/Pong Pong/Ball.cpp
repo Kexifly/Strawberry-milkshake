@@ -15,8 +15,8 @@ Ball::Ball()
 	// Setting values for the radius.
 	radius = ball.width * 0.5f;
 	// Setting the values for the speedX and speedY. 
-	speedX = 100;
-	speedY = 300;
+	speedX = 300;
+	speedY = 500;
 }
 // This is our GetPosition function which is for.. you guessed it! 
 Vector2 Ball::GetPosition() const
@@ -62,6 +62,6 @@ void Ball::Reset()
 {
 	x = GetScreenWidth() / 2;
 	y = GetScreenHeight() / 2;
-	speedX = 100;
-	speedY = 300;
+	speedX = 300;
+	speedY = 500;
 }
