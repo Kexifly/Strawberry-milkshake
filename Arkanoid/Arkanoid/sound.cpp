@@ -2,7 +2,7 @@
 #include <iostream>
 #include <windows.h>
 
-// Function that loads in a sound.wav and continues to play regardless of what keys are pressed.
+ //Function that loads in a sound.wav and continues to play regardless of what keys are pressed.
 void PlaySoundTrack()
 {
 	// Added SND_LOOP so that when the track ends it starts again from the beggining. 
