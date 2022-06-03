@@ -9,17 +9,17 @@ void Vaus::Draw()
 Vaus::Vaus()
 {
 	// Setting values for the x and y. 
-	x = -GetScreenWidth() / 2.0f;
-    y = GetScreenHeight() / 2.0f;
+	x = GetScreenWidth() / 2;
+	y = GetScreenHeight() - 90;
 	// Setting values for the radius.
-	radius = vaus.width * 0.5f;
+	radius = vaus.width;
 	// Setting the value for the speed.
-	speed = 500;
-};
+	speed = 1000;
+}
 
-Rectangle Vaus::GetPositionVaus() 
+Rectangle Vaus::GetRec() 
 {
-	return Rectangle{ x + vaus.width * 0.5f, y + vaus.height * 0.5f };
+	return Rectangle{ x + vaus.width, y + vaus.height};
 }
 
 float Vaus::GetRadius() const

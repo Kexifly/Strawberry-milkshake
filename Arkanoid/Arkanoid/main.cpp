@@ -6,8 +6,8 @@
 #include "brick.h"
 
 // Define the screen Width and Height. 
-#define SCREEN_WIDTH 1920
-#define SCREEN_HEIGHT 1080
+#define SCREEN_WIDTH 1440
+#define SCREEN_HEIGHT 900
 
 int main()
 {
@@ -22,7 +22,7 @@ int main()
 	// Creating the ball object.
 	Ball ball; 
 	// Creating the vaus object.
-	Vaus vaus;
+	Vaus paddle;
 	// Creating the brick object.
 	Brick brick;
 	
@@ -33,17 +33,17 @@ int main()
 		// If pressing the LEFT key the vaus will move sidways to the left.
 		if (IsKeyDown(KEY_LEFT))
 		{
-			vaus.y -= vaus.speed * GetFrameTime();
+			paddle.x -= paddle.speed * GetFrameTime();
 		}
 		// If pressing the RIGHT key the vaus will go sideways to the right.
 		if (IsKeyDown(KEY_RIGHT))
 		{
-			vaus.y += vaus.speed * GetFrameTime();
+			paddle.x += paddle.speed * GetFrameTime();
 		}
 		ball.Update();
 
 		// Collison check with ball and vaus. 
-		if (CheckCollisionCircleRec(ball.GetPosition(), ball.GetRadius(), vaus.GetPositionVaus()))
+		if (CheckCollisionCircleRec(ball.GetPosition(), ball.GetRadius(), paddle.GetRec()))
 		{
 			// if statement that determines how the ball gains velocity upon hitting the vaus.
 			if (ball.GetVelocity().x < 0)
@@ -52,25 +52,30 @@ int main()
 
 			}
 		}
+		//Screen Collision With Vaus.
+		// 
+		// Right
+		if (paddle.x + paddle.vaus.width> SCREEN_WIDTH)
+		{
+			paddle.x = SCREEN_WIDTH - paddle.vaus.width -1;
+		}
+		// Left
+		if (paddle.x < 0)
+		{
+			paddle.x = 1;
+		}
 
 		BeginDrawing();
-		DrawFPS(10, 10);
 		DrawTexture(background, 0, 0, WHITE);
+		DrawFPS(15, 15);
+		ball.Draw();
+		paddle.Draw();
 		EndDrawing();
 
 	}
 	bool WindowShouldClose();
 
 
-
-
-
-
 	return 0;
-
-
-
-
-
 
 }

@@ -6,5 +6,5 @@
 void PlaySoundTrack()
 {
 	// Added SND_LOOP so that when the track ends it starts again from the beggining. 
-	BOOL played = PlaySound(L"", NULL, SND_LOOP | SND_ASYNC | SND_FILENAME | SND_NODEFAULT);
+	BOOL played = PlaySound(L"planet.wav", NULL, SND_LOOP | SND_ASYNC | SND_FILENAME | SND_NODEFAULT);
 }

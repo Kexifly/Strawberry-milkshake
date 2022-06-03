@@ -11,7 +11,7 @@ Ball::Ball()
 {
 	// Setting values for the x and y. 
 	x = -GetScreenWidth() / 2.0f;
-	y = GetScreenHeight() / 2.0f;
+	y = GetScreenHeight() / 10;
 	// Setting values for the radius.
 	radius = ball.width * 0.5f;
 	// Setting the values for the speedX and speedY. 
@@ -46,15 +46,15 @@ void Ball::Update()
 	x += speedX * GetFrameTime();
 	y += speedY * GetFrameTime();
 	// This is the logic that stops the ball from going off the screen. 
-	if (y < 0)
+	if (x < 0)
 	{
-		y = 0;
-		speedY *= -1;
+		x = 0;
+		speedX *= -1;
 	}
-	if (y > GetScreenHeight())
+	if (x > GetScreenHeight())
 	{
-		y = GetScreenHeight();
-		speedY *= -1;
+		x = GetScreenHeight();
+		speedX *= -1;
 	}
 }
 // This is our Reset function that holds the ball starting point values/variables. 

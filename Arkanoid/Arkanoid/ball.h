@@ -1,15 +1,15 @@
 #pragma once
 #include "raylib.h"
 
-class Ball
+struct Ball
 {
 	// Here we load in the custom tecture for our ball. // ADD SPRITE
-	Texture2D ball = LoadTexture("..\\..\\Images\\?????.png");
+	Texture2D ball = LoadTexture("..\\..\\Images\\smallball.png");
 	float x, y;
 	float speedX, speedY;
 	float radius;
 	// Everything below will be public (access)
-public:
+
 
 	void Draw();
 

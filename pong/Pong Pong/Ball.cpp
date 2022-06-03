@@ -51,7 +51,7 @@ void Ball::Update()
 		y = 0;
 		speedY *= -1;
 	}
-	if (y > GetScreenHeight())
+	if (y > (float)GetScreenHeight())
 	{
 		y = GetScreenHeight();
 		speedY *= -1;
